@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <b-container>
+      <app-header/>
+      <router-view/>
+      <app-footer/>
+    </b-container>
   </div>
 </template>
 
@@ -30,3 +30,14 @@
   }
 }
 </style>
+<script>
+import AppHeader from '@/components/AppHeader'
+import AppFooter from '@/components/AppFooter'
+
+export default {
+  components: {
+    AppFooter,
+    AppHeader
+  }
+}
+</script>
