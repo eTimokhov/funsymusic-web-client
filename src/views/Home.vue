@@ -20,11 +20,8 @@
           Check out new tracks that our users uploaded
         </p>
         <ul class="list-unstyled">
-          <li>
-            <router-link to="/tracks/1">Track 1 - ID</router-link>
-          </li>
-          <li>
-            <router-link to="/tracks/2">Track 2 - ID</router-link>
+          <li v-for="track in tracksData" :key="track.id">
+            <router-link :to="`/tracks/${track.id}`">{{ track.artist }} - {{ track.name }}</router-link>
           </li>
         </ul>
       </b-col>
@@ -67,10 +64,18 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import { fetchTracks } from '@/util/api'
 
 export default {
-  name: 'Home'
-  // components: {
-  // }
+  name: 'Home',
+  data () {
+    return {
+      tracksData: []
+    }
+  },
+  async mounted () {
+    const response = await fetchTracks()
+    this.tracksData = response.data
+  }
 }
 </script>
