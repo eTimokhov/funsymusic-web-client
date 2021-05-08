@@ -1,12 +1,36 @@
+<script>
+// @ is an alias to /src
+// import HelloWorld from '@/components/HelloWorld.vue'
+import { fetchTracks } from '@/util/api'
+
+export default {
+  name: 'Home',
+  data () {
+    return {
+      tracksData: []
+    }
+  },
+  computed: {
+    currentUser () {
+      return this.$store.state.auth.user
+    }
+  },
+  async mounted () {
+    const response = await fetchTracks()
+    this.tracksData = response.data
+  }
+}
+</script>
+
 <template>
   <div>
     <b-row>
       <b-col>
         <b-jumbotron header="Your favorite music service"
                      lead="Explore new music, create playlists, upload your own music and share it with friends!">
-          <b-button-group>
+          <b-button-group v-if="!currentUser">
+            <b-button to="/register" variant="secondary">Sign up</b-button>
             <b-button to="/login" variant="secondary">Sign in</b-button>
-            <b-button to="/registration" variant="secondary">Sign up</b-button>
           </b-button-group>
         </b-jumbotron>
       </b-col>
@@ -60,22 +84,3 @@
     </b-row>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-import { fetchTracks } from '@/util/api'
-
-export default {
-  name: 'Home',
-  data () {
-    return {
-      tracksData: []
-    }
-  },
-  async mounted () {
-    const response = await fetchTracks()
-    this.tracksData = response.data
-  }
-}
-</script>

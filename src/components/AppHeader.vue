@@ -1,3 +1,27 @@
+<script>
+export default {
+  name: 'AppHeader',
+  computed: {
+    currentUser () {
+      return this.$store.state.auth.user
+    },
+    showAdminBoard () {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes('ROLE_ADMIN')
+      }
+
+      return false
+    }
+  },
+  methods: {
+    logOut () {
+      this.$store.dispatch('auth/logout')
+      this.$router.push('/home')
+    }
+  }
+}
+</script>
+
 <template>
   <b-row>
     <b-col>
@@ -14,8 +38,24 @@
             <b-nav-item active-class="active" class="nav-link" to="/browse/users">Users</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item active-class="active" class="nav-link" to="/feed">Feed</b-nav-item>
-            <b-nav-item active-class="active" class="nav-link" to="/user/me">Username</b-nav-item>
+            <template v-if="currentUser">
+              <b-nav-item active-class="active" class="nav-link" to="/feed">Feed</b-nav-item>
+              <b-nav-item v-if="currentUser" active-class="active" class="nav-link" to="/user/me">
+                <b-icon icon="person"></b-icon>
+                {{
+                  currentUser.username
+                }}
+              </b-nav-item>
+              <b-nav-item v-if="currentUser" active-class="active" class="nav-link" @click.prevent="logOut">
+                <b-icon icon="signpost"></b-icon>
+                Log out
+              </b-nav-item>
+            </template>
+            <template v-else>
+              <b-nav-item active-class="active" class="nav-link" to="/register">Sign up</b-nav-item>
+              <b-nav-item active-class="active" class="nav-link" to="/login">Sign in</b-nav-item>
+            </template>
+
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -63,12 +103,6 @@
   <!--    </div>-->
   <!--  </nav>-->
 </template>
-
-<script>
-export default {
-  name: 'AppHeader'
-}
-</script>
 
 <style scoped>
 
