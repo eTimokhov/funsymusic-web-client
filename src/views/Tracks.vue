@@ -15,11 +15,6 @@ export default {
     currentUser () {
       return this.$store.state.auth.user
     }
-  },
-  methods: {},
-  async mounted () {
-    // const response = await fetchTracks()
-    // this.tracksData = response.data
   }
 }
 </script>

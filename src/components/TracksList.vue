@@ -1,6 +1,6 @@
 <script>
 
-import { fetchTracks } from '@/util/api'
+import TrackDataService from '../services/TrackDataService'
 
 export default {
   name: 'TracksList',
@@ -9,13 +9,17 @@ export default {
       tracksData: [],
       page: 1,
       count: 0,
-      pageSize: 3
+      pageSize: 10
     }
   },
   methods: {
     async retrieveTracks () {
-      const response = await fetchTracks(this.page - 1, this.pageSize)
-      const { tracks, totalItems } = response.data
+      // const response = await fetchTracks(this.page - 1, this.pageSize)
+      const response = await TrackDataService.getAll(this.page - 1, this.pageSize)
+      const {
+        tracks,
+        totalItems
+      } = response.data
       this.tracksData = tracks
       this.count = totalItems
     },

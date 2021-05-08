@@ -1,5 +1,5 @@
 const config = {
-  funsymusicApiUrl: 'http://localhost:8080/'
+  funsymusicApiUrl: 'http://localhost:8080'
 }
 
 export default config
