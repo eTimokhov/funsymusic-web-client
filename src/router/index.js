@@ -41,6 +41,12 @@ const routes = [
     name: 'playlists',
     // lazy-loaded
     component: () => import('../views/Playlists.vue')
+  },
+  {
+    path: '/browse/users',
+    name: 'users',
+    // lazy-loaded
+    component: () => import('../views/Users.vue')
   }
 ]
 
