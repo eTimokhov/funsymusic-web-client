@@ -29,6 +29,12 @@ const routes = [
     name: 'profile',
     // lazy-loaded
     component: () => import('../views/Profile.vue')
+  },
+  {
+    path: '/browse/tracks',
+    name: 'tracks',
+    // lazy-loaded
+    component: () => import('../views/Tracks.vue')
   }
 ]
 
