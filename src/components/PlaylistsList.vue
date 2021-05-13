@@ -4,12 +4,31 @@ import PlaylistDataService from '../services/PlaylistDataService'
 
 export default {
   name: 'PlaylistsList',
+  props: {
+    isPaginationEnabled: {
+      type: Boolean,
+      default: () => true
+    },
+    header: {
+      type: String,
+      default: () => 'Playlists'
+    },
+    ownerId: Number,
+    pageSize: {
+      type: Number,
+      default: () => 10
+    }
+  },
   data () {
     return {
       playlistsData: [],
       page: 1,
-      count: 0,
-      pageSize: 10
+      count: 0
+    }
+  },
+  computed: {
+    playlistsExist () {
+      return this.playlistsData && this.playlistsData.length > 0
     }
   },
   methods: {
@@ -38,7 +57,7 @@ export default {
 
 <template>
   <div class="list row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <b-pagination
         v-model="page"
         :total-rows="count"
@@ -55,6 +74,9 @@ export default {
           <router-link :to="`/playlists/${playlist.id}`">{{ playlist.name }}</router-link>
         </li>
       </ul>
+      <p v-else>
+        There are no playlists
+      </p>
     </div>
   </div>
 

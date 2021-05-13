@@ -4,7 +4,7 @@ import config from '../config/config'
 class AuthService {
   login (user) {
     return axios
-      .post(config.funsymusicApiUrl + 'api/auth/signin', {
+      .post(config.funsymusicApiUrl + '/api/auth/signin', {
         username: user.username,
         password: user.password
       })
