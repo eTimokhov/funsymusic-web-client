@@ -15,7 +15,7 @@ export default {
   methods: {
     async retrieveUsers () {
       // const response = await fetchUsers(this.page - 1, this.pageSize)
-      const response = await UserDataService.getAll(this.page - 1, this.pageSize)
+      const response = await UserDataService.getAll(this.buildRequestParams())
       const {
         users,
         totalItems
@@ -27,6 +27,14 @@ export default {
     handlePageChange (value) {
       this.page = value
       this.retrieveUsers()
+    },
+
+    buildRequestParams () {
+      const params = {
+        page: this.page - 1,
+        size: this.pageSize
+      }
+      return params
     }
 
   },

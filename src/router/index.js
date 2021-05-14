@@ -47,6 +47,12 @@ const routes = [
     name: 'users',
     // lazy-loaded
     component: () => import('../views/Users.vue')
+  },
+  {
+    path: '/users/:id',
+    name: 'userPage',
+    // lazy-loaded
+    component: () => import('../views/UserPage.vue')
   }
 ]
 

@@ -34,7 +34,7 @@ export default {
   methods: {
     async retrieveTracks () {
       // const response = await fetchTracks(this.page - 1, this.pageSize)
-      const response = await TrackDataService.getAll(this.page - 1, this.pageSize)
+      const response = await TrackDataService.getAll(this.buildRequestParams())
       const {
         tracks,
         totalItems
@@ -46,6 +46,17 @@ export default {
     handlePageChange (value) {
       this.page = value
       this.retrieveTracks()
+    },
+
+    buildRequestParams () {
+      const params = {
+        page: this.page - 1,
+        size: this.pageSize
+      }
+      if (this.uploaderId) {
+        params.userId = this.uploaderId
+      }
+      return params
     }
 
   },

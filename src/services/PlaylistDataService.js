@@ -2,8 +2,8 @@ import http from '../http-common'
 
 // TODO: fix methods, remove not existing methods
 class PlaylistDataService {
-  getAll () {
-    return http.get('/playlists')
+  getAll (params) {
+    return http.get('/playlists', { params })
   }
 
   get (id) {

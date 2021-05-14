@@ -24,10 +24,10 @@ export default {
     <b-row>
       <b-col md="12">
         <h3>
-          Explore new music
+          Browse new users
         </h3>
         <p>
-          Check out new users that our users uploaded
+          Check new users, find friends and people with similar musical taste!
         </p>
         <users-list/>
       </b-col>

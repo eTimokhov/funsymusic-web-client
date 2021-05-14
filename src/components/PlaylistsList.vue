@@ -34,7 +34,7 @@ export default {
   methods: {
     async retrievePlaylists () {
       // const response = await fetchPlaylists(this.page - 1, this.pageSize)
-      const response = await PlaylistDataService.getAll(this.page - 1, this.pageSize)
+      const response = await PlaylistDataService.getAll(this.buildRequestParams())
       const {
         playlists,
         totalItems
@@ -46,6 +46,17 @@ export default {
     handlePageChange (value) {
       this.page = value
       this.retrievePlaylists()
+    },
+
+    buildRequestParams () {
+      const params = {
+        page: this.page - 1,
+        size: this.pageSize
+      }
+      if (this.ownerId) {
+        params.userId = this.ownerId
+      }
+      return params
     }
 
   },
@@ -59,6 +70,7 @@ export default {
   <div class="list row">
     <div class="col-md-6">
       <b-pagination
+        v-show="isPaginationEnabled"
         v-model="page"
         :total-rows="count"
         :per-page="pageSize"
@@ -66,10 +78,8 @@ export default {
         next-text="Next"
         @change="handlePageChange"
       ></b-pagination>
-    </div>
-    <div class="col-md-6">
-      <h4>Playlists List</h4>
-      <ul class="list-group" id="tutorials-list">
+      <h4>{{ header }}</h4>
+      <ul v-if="playlistsExist" class="list-group" id="tutorials-list">
         <li v-for="playlist in playlistsData" :key="playlist.id">
           <router-link :to="`/playlists/${playlist.id}`">{{ playlist.name }}</router-link>
         </li>

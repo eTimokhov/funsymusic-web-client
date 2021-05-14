@@ -2,8 +2,8 @@ import http from '../http-common'
 
 // TODO: fix methods, remove not existing methods
 class TrackDataService {
-  getAll () {
-    return http.get('/tracks')
+  getAll (params) {
+    return http.get('/tracks', { params })
   }
 
   get (id) {

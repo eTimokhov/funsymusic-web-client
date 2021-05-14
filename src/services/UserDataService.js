@@ -2,8 +2,8 @@ import http from '../http-common'
 
 // TODO: fix methods, remove not existing methods
 class UserDataService {
-  getAll () {
-    return http.get('/users')
+  getAll (params) {
+    return http.get('/users', { params })
   }
 
   get (id) {
