@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     async retrieveUsers () {
-      // const response = await fetchUsers(this.page - 1, this.pageSize)
       const response = await UserDataService.getAll(this.buildRequestParams())
       const {
         users,

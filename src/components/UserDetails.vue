@@ -1,0 +1,82 @@
+<script>
+import UserDataService from '@/services/UserDataService'
+
+export default {
+  name: 'UserDetails',
+  components: {
+    // 'comments-section': CommentsSection
+  },
+  props: {
+    user: {
+      required: true
+    },
+    currentUser: Object,
+    isCurrentUserPage: Boolean
+  },
+  data () {
+    return {
+      isSubscribed: undefined
+    }
+  },
+  computed: {},
+  methods: {
+    async retrieveSubscription () {
+      this.loading = true
+      const response = await UserDataService.getSubscription(this.user.id)
+      this.isSubscribed = response.data.isSubscribed
+      this.loading = false
+    },
+    subscribe () {
+      this.loading = true
+      UserDataService.changeSubscription(this.user.id, 'SUBSCRIBE').finally(
+        () => {
+          this.retrieveSubscription()
+        }
+      )
+    },
+    unsubscribe () {
+      this.loading = true
+      UserDataService.changeSubscription(this.user.id, 'UNSUBSCRIBE').finally(
+        () => {
+          this.retrieveSubscription()
+        }
+      )
+    }
+  },
+  async mounted () {
+    await this.retrieveSubscription()
+  }
+}
+</script>
+
+<template>
+  <div class="row">
+    <div class="col-md-3">
+      <img class="rounded" :src="`/images/${user.image}`"/>
+    </div>
+    <div class="col-md-9">
+      <h3>{{ user.username }}</h3>
+      <p>
+        Signed up {{ user.registrationDate }}
+      </p>
+      <button v-if="isCurrentUserPage" type="button" class="btn btn-primary" data-toggle="modal"
+              data-target="#changeImageFormModal">
+        Change profile image
+      </button>
+      <template v-if="!isCurrentUserPage && currentUser && isSubscribed !== undefined">
+        <button v-if="!isSubscribed" @click="subscribe" :disabled="loading">
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+          <span>Subscribe</span>
+        </button>
+        <button v-else @click="unsubscribe" :disabled="loading">
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+          <span>Unsubscribe</span>
+        </button>
+      </template>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+
+</style>

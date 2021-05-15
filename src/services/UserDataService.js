@@ -10,24 +10,12 @@ class UserDataService {
     return http.get(`/users/${id}`)
   }
 
-  create (data) {
-    return http.post('/users', data)
+  getSubscription (id) {
+    return http.get(`/users/${id}/sub`)
   }
 
-  update (id, data) {
-    return http.put(`/users/${id}`, data)
-  }
-
-  delete (id) {
-    return http.delete(`/users/${id}`)
-  }
-
-  deleteAll () {
-    return http.delete('/users')
-  }
-
-  findByTitle (title) {
-    return http.get(`/users?title=${title}`)
+  changeSubscription (id, action) {
+    return http.post(`/users/${id}/sub`, { action })
   }
 }
 
