@@ -1,5 +1,5 @@
 <script>
-import Playlist from '@/model/playlist'
+import Playlist from '@/model/form/playlist'
 import PlaylistDataService from '@/services/PlaylistDataService'
 
 export default {
@@ -55,7 +55,7 @@ export default {
             name="name"
             id="name"
           />
-          <span  v-if="errors.has('name')" class="text-danger">Playlist name is required!</span>
+          <span v-if="errors.has('name')" class="text-danger">Playlist name is required!</span>
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-block" :disabled="loading">

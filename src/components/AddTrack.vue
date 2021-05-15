@@ -1,5 +1,5 @@
 <script>
-import Track from '@/model/track'
+import Track from '@/model/form/track'
 import TrackDataService from '@/services/TrackDataService'
 import UploadTrack from '@/components/UploadTrack'
 

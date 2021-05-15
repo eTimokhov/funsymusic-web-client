@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import User from '../model/user'
+import User from '../model/form/user'
 
 export default {
   name: 'Register',

@@ -1,6 +1,6 @@
 <script>
 import PlaylistsList from '@/components/PlaylistsList'
-import AddPlaylist from '@/views/AddPlaylist'
+import AddPlaylist from '@/components/AddPlaylist'
 
 export default {
   name: 'Playlists',

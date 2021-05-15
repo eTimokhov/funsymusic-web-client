@@ -30,6 +30,9 @@ export default {
 <template>
   <div>
     {{ userId }}
+    <h3 v-if="isCurrentUserPage">
+      This is current user's page!
+    </h3>
     <tracks-list
       :is-pagination-enabled=false
       header="Users tracks"
