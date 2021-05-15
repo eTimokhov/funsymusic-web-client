@@ -2,11 +2,13 @@
 
 import TrackDataService from '../services/TrackDataService'
 import CommentsSection from '@/components/CommentsSection'
+import LikeDetails from '@/components/LikeDetails'
 
 export default {
   name: 'TrackInfo',
   components: {
-    'comments-section': CommentsSection
+    'comments-section': CommentsSection,
+    'like-details': LikeDetails
   },
   props: {
     trackId: {
@@ -15,7 +17,7 @@ export default {
   },
   data () {
     return {
-      trackData: {}
+      trackData: null
     }
   },
   computed: {},
@@ -41,6 +43,11 @@ export default {
         <ul>Uploader: {{ trackData.uploaderUsername }}</ul>
       </li>
     </div>
+    <like-details
+      v-if="trackData"
+      target="track"
+      :target-id="trackId"
+    />
     <div class="row">
       <comments-section :track-id="trackId"/>
     </div>

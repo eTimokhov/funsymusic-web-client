@@ -15,7 +15,8 @@ export default {
   },
   data () {
     return {
-      isSubscribed: undefined
+      isSubscribed: undefined,
+      loading: false
     }
   },
   computed: {},
