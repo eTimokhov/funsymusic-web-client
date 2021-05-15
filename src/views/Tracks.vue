@@ -1,10 +1,12 @@
 <script>
 import TracksList from '@/components/TracksList'
+import AddTrack from '@/components/AddTrack'
 
 export default {
   name: 'Tracks',
   components: {
-    'tracks-list': TracksList
+    'tracks-list': TracksList,
+    'add-track': AddTrack
   },
   data () {
     return {
@@ -22,6 +24,8 @@ export default {
 <template>
   <div>
     <b-row>
+      adfasf
+      <add-track/>
       <b-col md="12">
         <h3>
           Explore new music

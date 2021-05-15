@@ -1,10 +1,12 @@
 <script>
 import PlaylistsList from '@/components/PlaylistsList'
+import AddPlaylist from '@/views/AddPlaylist'
 
 export default {
   name: 'Playlists',
   components: {
-    'playlists-list': PlaylistsList
+    'playlists-list': PlaylistsList,
+    'add-playlist': AddPlaylist
   },
   data () {
     return {
@@ -23,6 +25,7 @@ export default {
   <div>
     <b-row>
       <b-col md="12">
+        <add-playlist/>
         <h3>
           Browse new playlists
         </h3>
