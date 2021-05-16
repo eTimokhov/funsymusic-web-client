@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col>
-      <div class="fixed-bottom">Funsymusic &copy; {{ currentYear }}</div>
+      <div>Funsymusic &copy; {{ currentYear }}</div>
     </b-col>
   </b-row>
 </template>

@@ -2,7 +2,7 @@
 import UploadService from '../services/UploadFilesService'
 
 export default {
-  name: 'upload-track',
+  name: 'AddProfileImage',
   data () {
     return {
       selectedFile: undefined,
@@ -17,7 +17,7 @@ export default {
     },
     upload () {
       this.loading = true
-      UploadService.upload(this.selectedFile).then(
+      UploadService.uploadTrack(this.selectedFile).then(
         response => {
           this.loading = false
           this.message = ''

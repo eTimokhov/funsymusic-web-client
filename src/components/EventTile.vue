@@ -1,4 +1,5 @@
 <script>
+import imgSrc from '@/util/imgSrc'
 
 export default {
   name: 'EventTile',
@@ -9,7 +10,9 @@ export default {
     }
   },
   data () {
-    return {}
+    return {
+      imgSrc: imgSrc
+    }
   },
   computed: {
     isTrackComment () {
@@ -34,7 +37,7 @@ export default {
 
 <template>
   <div class="media">
-    <img class="mr-3" :src="event.user.image"/>
+    <img class="mr-3" :src="imgSrc(event.user.image, true)"/>
     <div class="media-body">
       <router-link :to="`/users/${event.user.id}`">{{ event.user.username }}</router-link>
       <template v-if="isTrackComment">

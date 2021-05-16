@@ -2,6 +2,9 @@
 import UserDetails from '@/components/UserDetails'
 import TracksList from '@/components/TracksList'
 import PlaylistsList from '@/components/PlaylistsList'
+import TrackLikesList from '@/components/TrackLikesList'
+import PlaylistLikesList from '@/components/PlaylistLikesList'
+import CommentsList from '@/components/CommentsList'
 import UserDataService from '@/services/UserDataService'
 import EventDataService from '@/services/EventDataService'
 import EventsSection from '@/components/EventsSection'
@@ -12,7 +15,10 @@ export default {
     'user-details': UserDetails,
     'tracks-list': TracksList,
     'playlists-list': PlaylistsList,
-    'events-section': EventsSection
+    'events-section': EventsSection,
+    'track-likes-list': TrackLikesList,
+    'playlist-likes-list': PlaylistLikesList,
+    'comments-list': CommentsList
   },
   data () {
     return {
@@ -39,10 +45,13 @@ export default {
     async retrieveEvents () {
       const response = await EventDataService.getByUser(this.userId)
       this.userEvents = response.data.events
+    },
+    async updateInfo () {
+      await Promise.all([this.retrieveUser(), this.retrieveEvents()])
     }
   },
   async mounted () {
-    await Promise.all([this.retrieveUser(), this.retrieveEvents()])
+    await this.updateInfo()
   }
 }
 </script>
@@ -57,7 +66,9 @@ export default {
       v-if="userData"
       :user="userData"
       :current-user="currentUser"
-      :is-current-user-page="isCurrentUserPage"/>
+      :is-current-user-page="isCurrentUserPage"
+      @image-upload-success="updateInfo"
+    />
     <tracks-list
       :is-pagination-enabled=false
       header="Users tracks"
@@ -69,6 +80,18 @@ export default {
       header="Users playlists"
       :owner-id=userId
       :page-size=5
+    />
+    <track-likes-list
+      :user-id="userId"
+    />
+    <playlist-likes-list
+      :user-id="userId"
+    />
+    <playlist-likes-list
+      :user-id="userId"
+    />
+    <comments-list
+      :user-id="userId"
     />
     <events-section
       v-if="userEvents"

@@ -1,7 +1,7 @@
 import http from '../http-common'
 
 class UploadFilesService {
-  upload (file, onUploadProgress) {
+  uploadTrack (file) {
     const formData = new FormData()
 
     formData.append('file', file)
@@ -9,8 +9,19 @@ class UploadFilesService {
     return http.post('/tracks/uploadFile', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
-      },
-      onUploadProgress
+      }
+    })
+  }
+
+  uploadImage (file) {
+    const formData = new FormData()
+
+    formData.append('file', file)
+
+    return http.post('/user/image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
   }
 }
