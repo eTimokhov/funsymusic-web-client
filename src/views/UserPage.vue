@@ -3,17 +3,21 @@ import UserDetails from '@/components/UserDetails'
 import TracksList from '@/components/TracksList'
 import PlaylistsList from '@/components/PlaylistsList'
 import UserDataService from '@/services/UserDataService'
+import EventDataService from '@/services/EventDataService'
+import EventsSection from '@/components/EventsSection'
 
 export default {
   name: 'Users',
   components: {
     'user-details': UserDetails,
     'tracks-list': TracksList,
-    'playlists-list': PlaylistsList
+    'playlists-list': PlaylistsList,
+    'events-section': EventsSection
   },
   data () {
     return {
-      userData: null
+      userData: null,
+      userEvents: null
     }
   },
   computed: {
@@ -31,10 +35,14 @@ export default {
     async retrieveUser () {
       const response = await UserDataService.get(this.userId)
       this.userData = response.data.user
+    },
+    async retrieveEvents () {
+      const response = await EventDataService.getByUser(this.userId)
+      this.userEvents = response.data.events
     }
   },
   async mounted () {
-    await this.retrieveUser()
+    await Promise.all([this.retrieveUser(), this.retrieveEvents()])
   }
 }
 </script>
@@ -61,6 +69,10 @@ export default {
       header="Users playlists"
       :owner-id=userId
       :page-size=5
+    />
+    <events-section
+      v-if="userEvents"
+      :events="userEvents"
     />
   </div>
 </template>

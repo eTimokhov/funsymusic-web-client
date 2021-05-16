@@ -40,7 +40,7 @@ export default {
           <b-navbar-nav class="ml-auto">
             <template v-if="currentUser">
               <b-nav-item active-class="active" class="nav-link" to="/feed">Feed</b-nav-item>
-              <b-nav-item v-if="currentUser" active-class="active" class="nav-link" to="/user/me">
+              <b-nav-item v-if="currentUser" active-class="active" class="nav-link" :to="`/users/${currentUser.id}`">
                 <b-icon icon="person"></b-icon>
                 {{
                   currentUser.username

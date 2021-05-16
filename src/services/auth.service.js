@@ -22,7 +22,7 @@ class AuthService {
   }
 
   register (user) {
-    return axios.post(config.funsymusicApiUrl + 'api/auth/signup', {
+    return axios.post(config.funsymusicApiUrl + '/api/auth/signup', {
       username: user.username,
       password: user.password,
       passwordConfirm: user.passwordConfirm

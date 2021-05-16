@@ -50,6 +50,12 @@ const routes = [
     component: () => import('../views/Users.vue')
   },
   {
+    path: '/feed',
+    name: 'feed',
+    // lazy-loaded
+    component: () => import('../views/Feed.vue')
+  },
+  {
     path: '/users/:id',
     name: 'userPage',
     // lazy-loaded
