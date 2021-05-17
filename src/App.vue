@@ -1,18 +1,21 @@
 <script>
 import AppHeader from '@/components/AppHeader'
+import AppFooter from '@/components/AppFooter'
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    AppFooter
   }
 }
 </script>
 
 <template>
-  <div id="app" class="bg-light vh-100">
+  <div id="app" class="bg-light min-vh-100">
     <b-container>
       <app-header/>
       <router-view class="mt-3"/>
+      <app-footer/>
     </b-container>
   </div>
 </template>
