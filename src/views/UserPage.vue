@@ -1,5 +1,4 @@
 <script>
-import UserDetails from '@/components/UserDetails'
 import TracksList from '@/components/TracksList'
 import PlaylistsList from '@/components/PlaylistsList'
 import TrackLikesList from '@/components/TrackLikesList'
@@ -8,17 +7,18 @@ import CommentsList from '@/components/CommentsList'
 import UserDataService from '@/services/UserDataService'
 import EventDataService from '@/services/EventDataService'
 import EventsSection from '@/components/EventsSection'
+import ProfileCard from '@/components/ProfileCard'
 
 export default {
   name: 'Users',
   components: {
-    'user-details': UserDetails,
     'tracks-list': TracksList,
     'playlists-list': PlaylistsList,
     'events-section': EventsSection,
     'track-likes-list': TrackLikesList,
     'playlist-likes-list': PlaylistLikesList,
-    'comments-list': CommentsList
+    'comments-list': CommentsList,
+    'profile-card': ProfileCard
   },
   data () {
     return {
@@ -57,47 +57,49 @@ export default {
 </script>
 
 <template>
-  <div>
-    {{ userId }}
-    <h3 v-if="isCurrentUserPage">
-      This is current user's page!
-    </h3>
-    <user-details
-      v-if="userData"
-      :user="userData"
-      :current-user="currentUser"
-      :is-current-user-page="isCurrentUserPage"
-      @image-upload-success="updateInfo"
-    />
-    <tracks-list
-      :is-pagination-enabled=false
-      header="Users tracks"
-      :uploader-id=userId
-      :page-size=5
-    />
-    <playlists-list
-      :is-pagination-enabled=false
-      header="Users playlists"
-      :owner-id=userId
-      :page-size=5
-    />
-    <track-likes-list
-      :user-id="userId"
-    />
-    <playlist-likes-list
-      :user-id="userId"
-    />
-    <playlist-likes-list
-      :user-id="userId"
-    />
-    <comments-list
-      :user-id="userId"
-    />
+  <b-row>
+    <b-col>
+    <b-card-group columns>
+      <profile-card
+        v-if="userData"
+        :user="userData"
+        :current-user="currentUser"
+        :is-current-user-page="isCurrentUserPage"
+        @image-upload-success="updateInfo"
+      />
+      <tracks-list
+        :is-pagination-enabled=false
+        header="Tracks"
+        description="Latest tracks uploaded by user"
+        :uploader-id=userId
+        :page-size=7
+      />
+      <playlists-list
+        :is-pagination-enabled=false
+        header="Playlists"
+        description="Latest playlists created by user"
+        :owner-id=userId
+        :page-size=7
+      />
+      <track-likes-list
+        header="Liked tracks"
+        :user-id="userId"
+      />
+      <playlist-likes-list
+        header="Liked playlists"
+        :user-id="userId"
+      />
+      <comments-list
+        header="Comments"
+        :user-id="userId"
+      />
+    </b-card-group>
     <events-section
       v-if="userEvents"
       :events="userEvents"
     />
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <style scoped>

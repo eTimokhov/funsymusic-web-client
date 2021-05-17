@@ -44,17 +44,17 @@ export default {
 
 <template>
   <div>
-    <b-button v-b-modal.modal-upload-image>Change profile image</b-button>
+    <b-button v-b-modal.modal-upload-image block variant="outline-primary">Change image</b-button>
     <b-modal id="modal-upload-image" title="Upload profile image" @hidden="resetModal" hide-footer>
       <div v-if="!isUploaded">
         <div>
           <label class="btn btn-default">
             <input type="file" ref="file" @change="selectFile"/>
           </label>
-          <button class="btn btn-success" :disabled="!selectedFile" @click="upload">
+          <b-button variant="success" block :disabled="!selectedFile" @click="upload">
             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Upload</span>
-          </button>
+          </b-button>
           <div class="text-danger">{{ message }}</div>
         </div>
       </div>

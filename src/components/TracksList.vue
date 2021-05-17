@@ -13,6 +13,10 @@ export default {
       type: String,
       default: () => 'Tracks'
     },
+    description: {
+      type: String,
+      default: ''
+    },
     uploaderId: Number,
     pageSize: {
       type: Number,
@@ -67,29 +71,53 @@ export default {
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-6">
-      <b-pagination
-        v-if="isPaginationEnabled"
-        v-model="page"
-        :total-rows="count"
-        :per-page="pageSize"
-        prev-text="Prev"
-        next-text="Next"
-        @change="handlePageChange"
-      ></b-pagination>
-      <h4>{{ header }}</h4>
-      <ul v-if="tracksExist" class="list-group" id="tracks-list">
-        <li v-for="track in tracksData" :key="track.id">
-          <router-link :to="`/tracks/${track.id}`">{{ track.artist }} - {{ track.name }}</router-link>
-        </li>
-      </ul>
-      <p v-else>
-        There are no tracks
-      </p>
-    </div>
-  </div>
-
+  <b-card no-body>
+    <b-card-header>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="h4">
+          <template v-if="header">
+            {{ header }}
+          </template>
+        </div>
+        <div>
+          <b-icon icon="music-note-beamed" class="mr-2" scale="2" variant="dark"/>
+        </div>
+      </div>
+      <small v-if="description">
+        {{description}}
+      </small>
+    </b-card-header>
+    <b-list-group flush>
+      <b-list-group-item v-if="isPaginationEnabled">
+        <b-pagination
+          v-model="page"
+          :total-rows="count"
+          :per-page="pageSize"
+          prev-text="Prev"
+          next-text="Next"
+          @change="handlePageChange"
+          class="mb-0"
+          pills
+        ></b-pagination>
+      </b-list-group-item>
+      <template v-if="tracksExist">
+        <b-list-group-item v-for="track in tracksData" :key="track.id" class="d-flex justify-content-between align-items-center">
+          <div>
+            <router-link :to="`/tracks/${track.id}`">
+              <div class="font-weight-bold">{{ track.name }}</div>
+            </router-link>
+            <div class="text-muted">{{ track.artist }}</div>
+          </div>
+          <div class="float-right text-secondary">
+            3:16
+          </div>
+        </b-list-group-item>
+      </template>
+      <b-list-group-item v-else>
+        <div class="h6 text-muted">There are no tracks</div>
+      </b-list-group-item>
+    </b-list-group>
+  </b-card>
 </template>
 
 <style scoped>

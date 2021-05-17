@@ -42,7 +42,7 @@ export default {
 
 <template>
   <div>
-    <b-button v-b-modal.modal-new-playlist>New playlist</b-button>
+    <b-button block v-b-modal.modal-new-playlist>New playlist</b-button>
     <b-modal id="modal-new-playlist" title="New playlist" @hidden="resetModal" hide-footer>
       <form v-if="!isPlaylistCreated" name="addPlaylist" @submit.prevent="handleCreatePlaylist">
         <div class="form-group">
@@ -58,10 +58,10 @@ export default {
           <span v-if="errors.has('name')" class="text-danger">Playlist name is required!</span>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block" :disabled="loading">
+          <b-button variant="primary" block :disabled="loading">
             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Create</span>
-          </button>
+          </b-button>
         </div>
         <div class="form-group">
           <span  v-if="message" class="text-danger">{{ message }}!</span>
@@ -70,7 +70,7 @@ export default {
       <p v-else>
         Playlist is successfully created.
       </p>
-      <b-button class="mt-3" block @click="$bvModal.hide('modal-new-playlist')">Close</b-button>
+      <b-button block @click="$bvModal.hide('modal-new-playlist')">Close</b-button>
     </b-modal>
   </div>
 </template>

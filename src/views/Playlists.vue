@@ -24,8 +24,7 @@ export default {
 <template>
   <div>
     <b-row>
-      <b-col md="12">
-        <add-playlist/>
+      <b-col md="9">
         <h3>
           Browse new playlists
         </h3>
@@ -33,6 +32,9 @@ export default {
           Check out new playlists that our users created
         </p>
         <playlists-list/>
+      </b-col>
+      <b-col md="3">
+        <add-playlist/>
       </b-col>
     </b-row>
   </div>

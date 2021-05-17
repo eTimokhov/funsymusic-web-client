@@ -9,6 +9,10 @@ export default {
       type: String,
       default: () => 'Comments'
     },
+    description: {
+      type: String,
+      default: ''
+    },
     userId: {
       required: true
     },
@@ -40,20 +44,39 @@ export default {
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-6">
-      <h4>{{ header }}</h4>
-      <ul v-if="commentsExist" class="list-group" id="liked-tracks-list">
-        <li v-for="comment in commentsData" :key="comment.id">
-          <router-link :to="`/tracks/${comment.trackId}`">{{ comment.commentDateRel }}:</router-link>
-          <small>{{ comment.text }}</small>
-        </li>
-      </ul>
-      <p v-else>
-        There are no comments
-      </p>
-    </div>
-  </div>
+  <b-card no-body>
+    <b-card-header>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="h4">
+          <template v-if="header">
+            {{ header }}
+          </template>
+        </div>
+        <div>
+          <b-icon icon="chat-left" class="mr-2" scale="2" variant="dark"/>
+        </div>
+      </div>
+      <small v-if="description">
+        {{ description }}
+      </small>
+    </b-card-header>
+    <b-list-group flush>
+      <template v-if="commentsExist">
+        <b-list-group-item v-for="comment in commentsData" :key="comment.id">
+          <div>
+            <b-icon icon="chat-left" class="mr-2"/>
+            <small class="text-muted">{{ comment.commentDateRel }} on </small>
+            <small>
+              <router-link :to="`/tracks/${comment.trackId}`">Track</router-link>
+            </small></div>
+          <div><small>{{ comment.text }}</small></div>
+        </b-list-group-item>
+      </template>
+      <b-list-group-item v-else>
+        <div class="h6 text-muted">There are no comments</div>
+      </b-list-group-item>
+    </b-list-group>
+  </b-card>
 
 </template>
 

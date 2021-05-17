@@ -4,16 +4,40 @@ import UserDataService from '../services/UserDataService'
 
 export default {
   name: 'UsersList',
+  props: {
+    isPaginationEnabled: {
+      type: Boolean,
+      default: () => true
+    },
+    header: {
+      type: String,
+      default: () => 'Users'
+    },
+    description: {
+      type: String,
+      default: ''
+    },
+    uploaderId: Number,
+    pageSize: {
+      type: Number,
+      default: () => 10
+    }
+  },
   data () {
     return {
       usersData: [],
       page: 1,
-      count: 0,
-      pageSize: 10
+      count: 0
+    }
+  },
+  computed: {
+    usersExist () {
+      return this.usersData && this.usersData.length > 0
     }
   },
   methods: {
     async retrieveUsers () {
+      // const response = await fetchUsers(this.page - 1, this.pageSize)
       const response = await UserDataService.getAll(this.buildRequestParams())
       const {
         users,
@@ -33,6 +57,9 @@ export default {
         page: this.page - 1,
         size: this.pageSize
       }
+      if (this.uploaderId) {
+        params.userId = this.uploaderId
+      }
       return params
     }
 
@@ -44,8 +71,24 @@ export default {
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-12">
+  <b-card no-body>
+    <b-card-header>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="h4">
+          <template v-if="header">
+            {{ header }}
+          </template>
+        </div>
+        <div>
+          <b-icon icon="person" class="mr-2" scale="2" variant="dark"/>
+        </div>
+      </div>
+      <small v-if="description">
+        {{description}}
+      </small>
+    </b-card-header>
+    <b-list-group flush>
+      <b-list-group-item v-if="isPaginationEnabled">
       <b-pagination
         v-model="page"
         :total-rows="count"
@@ -53,18 +96,24 @@ export default {
         prev-text="Prev"
         next-text="Next"
         @change="handlePageChange"
+          class="mb-0"
+          pills
       ></b-pagination>
-    </div>
-    <div class="col-md-6">
-      <h4>Users List</h4>
-      <ul class="list-group" id="tutorials-list">
-        <li v-for="user in usersData" :key="user.id">
-          <router-link :to="`/users/${user.id}`">{{ user.username }}</router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
-
+      </b-list-group-item>
+      <template v-if="usersExist">
+        <b-list-group-item v-for="user in usersData" :key="user.id" class="d-flex justify-content-between align-items-center">
+          <div>
+            <router-link :to="`/users/${user.id}`">
+              <div class="font-weight-bold">{{ user.username }}</div>
+            </router-link>
+          </div>
+        </b-list-group-item>
+      </template>
+      <b-list-group-item v-else>
+        <div class="h6 text-muted">There are no users</div>
+      </b-list-group-item>
+    </b-list-group>
+  </b-card>
 </template>
 
 <style scoped>

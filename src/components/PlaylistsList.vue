@@ -13,6 +13,10 @@ export default {
       type: String,
       default: () => 'Playlists'
     },
+    description: {
+      type: String,
+      default: ''
+    },
     ownerId: Number,
     pageSize: {
       type: Number,
@@ -67,29 +71,60 @@ export default {
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-6">
-      <b-pagination
-        v-show="isPaginationEnabled"
-        v-model="page"
-        :total-rows="count"
-        :per-page="pageSize"
-        prev-text="Prev"
-        next-text="Next"
-        @change="handlePageChange"
-      ></b-pagination>
-      <h4>{{ header }}</h4>
-      <ul v-if="playlistsExist" class="list-group" id="tutorials-list">
-        <li v-for="playlist in playlistsData" :key="playlist.id">
-          <router-link :to="`/playlists/${playlist.id}`">{{ playlist.name }}</router-link>
-        </li>
-      </ul>
-      <p v-else>
-        There are no playlists
-      </p>
-    </div>
-  </div>
-
+  <b-card no-body>
+    <b-card-header>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="h4">
+          <template v-if="header">
+            {{ header }}
+          </template>
+        </div>
+        <div>
+          <b-icon icon="music-note-list" class="mr-2" scale="2" variant="dark"/>
+        </div>
+      </div>
+      <small v-if="description">
+        {{description}}
+      </small>
+    </b-card-header>
+    <b-list-group flush>
+      <b-list-group-item v-if="isPaginationEnabled">
+        <b-pagination
+          v-model="page"
+          :total-rows="count"
+          :per-page="pageSize"
+          prev-text="Prev"
+          next-text="Next"
+          @change="handlePageChange"
+          class="mb-0"
+          pills
+        ></b-pagination>
+      </b-list-group-item>
+      <template v-if="playlistsExist">
+        <b-list-group-item v-for="playlist in playlistsData" :key="playlist.id" class="d-flex justify-content-between align-items-center">
+          <div>
+            <div>
+              <router-link :to="`/playlists/${playlist.id}`">
+                <span class="font-weight-bold text-dark">{{ playlist.name }}</span>
+              </router-link>
+            </div>
+            <div>
+              <small> by </small>
+              <router-link :to="`/users/${playlist.ownerId}`">
+                <span class="text-muted">{{ playlist.ownerUsername }}</span>
+              </router-link>
+            </div>
+          </div>
+          <div>
+            <b-icon icon="list" class="mr-2"/>
+          </div>
+        </b-list-group-item>
+      </template>
+      <b-list-group-item v-else>
+        <div class="h6 text-muted">There are no playlists</div>
+      </b-list-group-item>
+    </b-list-group>
+  </b-card>
 </template>
 
 <style scoped>

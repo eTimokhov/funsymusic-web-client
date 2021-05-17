@@ -23,9 +23,9 @@ export default {
 </script>
 
 <template>
-  <b-row>
-    <b-col>
-      <b-navbar toggleable="lg" type="light" variant="light">
+<!--  <b-row>-->
+<!--    <b-col>-->
+      <b-navbar toggleable="lg" type="dark" variant="primary">
         <b-navbar-brand href="#">Funsymusic</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -59,8 +59,8 @@ export default {
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-    </b-col>
-  </b-row>
+<!--    </b-col>-->
+<!--  </b-row>-->
 
   <!--  <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
   <!--    <button class="navbar-toggler" type="button" data-toggle="collapse"-->

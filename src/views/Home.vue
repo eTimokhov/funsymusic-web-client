@@ -1,23 +1,21 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import { fetchTracks } from '@/util/api'
+import TracksList from '@/components/TracksList'
+import PlaylistsList from '@/components/PlaylistsList'
+import UsersList from '@/components/UsersList'
 
 export default {
   name: 'Home',
-  data () {
-    return {
-      tracksData: []
-    }
+  components: {
+    'tracks-list': TracksList,
+    'playlists-list': PlaylistsList,
+    'users-list': UsersList
   },
   computed: {
     currentUser () {
       return this.$store.state.auth.user
     }
-  },
-  async mounted () {
-    const response = await fetchTracks()
-    this.tracksData = response.data
   }
 }
 </script>
@@ -37,49 +35,28 @@ export default {
     </b-row>
     <b-row>
       <b-col md="4">
-        <h3>
-          Explore new music
-        </h3>
-        <p>
-          Check out new tracks that our users uploaded
-        </p>
-        <ul class="list-unstyled">
-          <li v-for="track in tracksData" :key="track.id">
-            <router-link :to="`/tracks/${track.id}`">{{ track.artist }} - {{ track.name }}</router-link>
-          </li>
-        </ul>
+        <tracks-list
+          header="Explore new music"
+          description="Check out new tracks that our users uploaded"
+          :page-size=10
+          :is-pagination-enabled=false
+        />
       </b-col>
       <b-col md="4">
-        <h3>
-          Check new playlists
-        </h3>
-        <p>
-          Listen new music collections that our users created
-        </p>
-        <ul class="list-unstyled">
-          <li>
-            <router-link to="/playlists/1">Playlist 1</router-link>
-          </li>
-          <li>
-            <router-link to="/playlists/2">Playlist 2</router-link>
-          </li>
-        </ul>
+        <playlists-list
+          header="Check new playlists"
+          description="Listen new music collections that our users created"
+          :page-size=10
+          :is-pagination-enabled=false
+        />
       </b-col>
       <b-col md="4">
-        <h3>
-          Subscribe to new users
-        </h3>
-        <p>
-          Explore new users of our service and find new friends
-        </p>
-        <ul class="list-unstyled">
-          <li>
-            <router-link to="/users/1">User 1</router-link>
-          </li>
-          <li>
-            <router-link to="/users/2">User 2</router-link>
-          </li>
-        </ul>
+        <users-list
+          header="Subscribe to new users"
+          description="Explore new users of our service and find new friends"
+          :page-size=10
+          :is-pagination-enabled=false
+        />
       </b-col>
     </b-row>
   </div>
