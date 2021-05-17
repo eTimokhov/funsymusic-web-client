@@ -101,11 +101,14 @@ export default {
       ></b-pagination>
       </b-list-group-item>
       <template v-if="usersExist">
-        <b-list-group-item v-for="user in usersData" :key="user.id" class="d-flex justify-content-between align-items-center">
+        <b-list-group-item v-for="user in usersData" :key="user.id">
           <div>
             <router-link :to="`/users/${user.id}`">
-              <div class="font-weight-bold">{{ user.username }}</div>
+              <div class="font-weight-bold text-warning">{{ user.username }}</div>
             </router-link>
+          </div>
+          <div>
+            <small>joined {{user.registrationDate | toPrettyTime}}</small>
           </div>
         </b-list-group-item>
       </template>

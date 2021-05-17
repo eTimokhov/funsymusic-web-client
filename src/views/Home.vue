@@ -24,8 +24,11 @@ export default {
   <div>
     <b-row>
       <b-col>
-        <b-jumbotron header="Your favorite music service"
-                     lead="Explore new music, create playlists, upload your own music and share it with friends!">
+        <b-jumbotron
+          class="p-5"
+          bg-variant="secondary"
+          header="Your favorite music service"
+          lead="Explore new music, create playlists, upload your own music and share it with friends!">
           <b-button-group v-if="!currentUser">
             <b-button to="/register" variant="secondary">Sign up</b-button>
             <b-button to="/login" variant="secondary">Sign in</b-button>

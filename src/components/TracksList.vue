@@ -108,8 +108,8 @@ export default {
             </router-link>
             <div class="text-muted">{{ track.artist }}</div>
           </div>
-          <div class="float-right text-secondary">
-            3:16
+          <div class="text-muted">
+            {{ track.length | toTrackTimeFormat }}
           </div>
         </b-list-group-item>
       </template>

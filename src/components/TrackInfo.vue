@@ -3,7 +3,6 @@
 import TrackDataService from '../services/TrackDataService'
 import CommentsSection from '@/components/CommentsSection'
 import LikeDetails from '@/components/LikeDetails'
-import audioSrc from '@/util/audioSrc'
 
 export default {
   name: 'TrackInfo',
@@ -18,8 +17,7 @@ export default {
   },
   data () {
     return {
-      trackData: null,
-      audioSrc: audioSrc
+      trackData: null
     }
   },
   computed: {},
@@ -55,7 +53,7 @@ export default {
     </div>
     <div class="row">
       Audio:
-      <audio controls :src="audioSrc(trackId)" type="audio/mpeg"/>
+      <audio controls :src="trackId | toAudioSrc" type="audio/mpeg"/>
     </div>
   </div>
 </template>

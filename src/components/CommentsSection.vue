@@ -52,7 +52,7 @@ export default {
               <small class="d-block">
                 by
                 <router-link :to="`/users/${comment.user.username}`"> {{ comment.user.username }}</router-link>
-                {{ comment.commentDateRel }}
+                {{ comment.commentDate }}
               </small>
               <span class="font-italic">{{ comment.text }}</span>
             </div>

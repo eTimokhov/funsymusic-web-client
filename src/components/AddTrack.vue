@@ -55,7 +55,10 @@ export default {
 
 <template>
   <div>
-    <b-button v-b-modal.modal-new-track>Upload track</b-button>
+    <b-button v-b-modal.modal-new-track block size="lg" variant="outline-primary">
+      <b-icon icon="upload"></b-icon>
+      Upload track
+    </b-button>
     <b-modal id="modal-new-track" title="New track" @hidden="resetModal" hide-footer>
       <upload-track v-if="state === 'initial'"
                     @track-upload-success="handleUploadTrack"/>
@@ -86,16 +89,16 @@ export default {
             <span v-if="errors.has('artist')" class="text-danger">Track artist is required!</span>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
+            <b-button variant="outline-success" block :disabled="loading">
               <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               <span>Save</span>
-            </button>
+            </b-button>
           </div>
           <div class="form-group">
             <span v-if="message" class="text-danger">{{ message }}!</span>
           </div>
         </form>
-        <b-button class="mt-3 btn btn-danger" block @click="handleCancelSave">Cancel</b-button>
+        <b-button variant="outline-danger" block @click="handleCancelSave">Cancel</b-button>
       </div>
       <p v-if="state === 'afterSave'">
         Track is successfully saved.

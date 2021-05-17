@@ -22,14 +22,13 @@ export default {
 <template>
   <div>
     <b-row>
-      <b-col md="12">
-        <h3>
-          Browse new users
-        </h3>
-        <p>
-          Check new users, find friends and people with similar musical taste!
-        </p>
-        <users-list/>
+      <b-col md="9">
+        <users-list
+          :is-pagination-enabled=true
+          header="All users"
+          description="Check new users, find friends and people with similar musical taste!"
+          :page-size=10
+        />
       </b-col>
     </b-row>
   </div>

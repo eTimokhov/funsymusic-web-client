@@ -65,7 +65,7 @@ export default {
         <b-list-group-item v-for="comment in commentsData" :key="comment.id">
           <div>
             <b-icon icon="chat-left" class="mr-2"/>
-            <small class="text-muted">{{ comment.commentDateRel }} on </small>
+            <small class="text-muted">{{ comment.commentDate | toPrettyTime }} on </small>
             <small>
               <router-link :to="`/tracks/${comment.trackId}`">Track</router-link>
             </small></div>

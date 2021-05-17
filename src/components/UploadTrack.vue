@@ -40,10 +40,10 @@ export default {
     <label class="btn btn-default">
       <input type="file" ref="file" @change="selectFile"/>
     </label>
-    <button class="btn btn-success" :disabled="!selectedFile" @click="upload">
+    <b-button variant="outline-success" block :disabled="!selectedFile" @click="upload">
       <span v-show="loading" class="spinner-border spinner-border-sm"></span>
       <span>Upload</span>
-    </button>
+    </b-button>
     <div class="text-danger">{{ message }}</div>
   </div>
 </template>

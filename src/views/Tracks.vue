@@ -24,16 +24,16 @@ export default {
 <template>
   <div>
     <b-row>
-      adfasf
-      <add-track/>
-      <b-col md="12">
-        <h3>
-          Explore new music
-        </h3>
-        <p>
-          Check out new tracks that our users uploaded
-        </p>
-        <tracks-list/>
+      <b-col md="9">
+        <tracks-list
+          :is-pagination-enabled=true
+          header="All tracks"
+          description="Check out all the track in our music service"
+          :page-size=10
+        />
+      </b-col>
+      <b-col md="3">
+        <add-track/>
       </b-col>
     </b-row>
   </div>

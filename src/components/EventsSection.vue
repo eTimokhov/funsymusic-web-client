@@ -13,6 +13,18 @@ export default {
       default () {
         return []
       }
+    },
+    header: {
+      type: String,
+      default: () => 'Events'
+    },
+    description: {
+      type: String,
+      default: 'Latest events'
+    },
+    noEventsMessage: {
+      type: String,
+      default: 'No events'
     }
   },
   data () {
@@ -28,9 +40,10 @@ export default {
 </script>
 
 <template>
-  <div class="col-md-9">
-    <h4>Last events</h4>
-    <p v-if="!events.length">This user hasn't done anything lately</p>
+  <div>
+    <h2>{{ header }}</h2>
+    <p v-if="description && events.length">{{ description }}</p>
+    <p v-if="!events.length">{{ noEventsMessage }}</p>
     <event-tile
       v-for="event in events"
       :key="event.id"

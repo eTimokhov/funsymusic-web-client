@@ -42,7 +42,9 @@ export default {
 
 <template>
   <div>
-    <b-button block v-b-modal.modal-new-playlist>New playlist</b-button>
+    <b-button v-b-modal.modal-new-playlist block size="lg" variant="outline-dark">
+      <b-icon icon="plus-circle"></b-icon>
+      New playlist</b-button>
     <b-modal id="modal-new-playlist" title="New playlist" @hidden="resetModal" hide-footer>
       <form v-if="!isPlaylistCreated" name="addPlaylist" @submit.prevent="handleCreatePlaylist">
         <div class="form-group">
@@ -58,7 +60,7 @@ export default {
           <span v-if="errors.has('name')" class="text-danger">Playlist name is required!</span>
         </div>
         <div class="form-group">
-          <b-button variant="primary" block :disabled="loading">
+          <b-button variant="outline-success" block :disabled="loading">
             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Create</span>
           </b-button>

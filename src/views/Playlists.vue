@@ -25,13 +25,12 @@ export default {
   <div>
     <b-row>
       <b-col md="9">
-        <h3>
-          Browse new playlists
-        </h3>
-        <p>
-          Check out new playlists that our users created
-        </p>
-        <playlists-list/>
+        <playlists-list
+          :is-pagination-enabled=true
+          header="All playlists"
+          description="Check out all the playlists created by our users"
+          :page-size=10
+        />
       </b-col>
       <b-col md="3">
         <add-playlist/>

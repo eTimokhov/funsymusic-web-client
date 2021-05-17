@@ -32,10 +32,12 @@ export default {
 
 <template>
   <div>
-    <h1>Events page</h1>
     <events-section
       v-if="subsEvents"
       :events="subsEvents"
+      header="Feed"
+      description="Latest events & actions of user that you subscribed"
+      no-events-message="No events here"
     />
   </div>
 </template>

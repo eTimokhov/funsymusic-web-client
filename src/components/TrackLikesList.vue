@@ -72,7 +72,7 @@ export default {
             </router-link>
             <div class="text-muted">{{ likedTrack.artist }}</div>
           </div>
-          <div class="float-right text-secondary">
+          <div class="text-muted">
             3:16
           </div>
         </b-list-group-item>

@@ -57,49 +57,58 @@ export default {
 </script>
 
 <template>
-  <b-row>
-    <b-col>
-    <b-card-group columns>
-      <profile-card
-        v-if="userData"
-        :user="userData"
-        :current-user="currentUser"
-        :is-current-user-page="isCurrentUserPage"
-        @image-upload-success="updateInfo"
-      />
-      <tracks-list
-        :is-pagination-enabled=false
-        header="Tracks"
-        description="Latest tracks uploaded by user"
-        :uploader-id=userId
-        :page-size=7
-      />
-      <playlists-list
-        :is-pagination-enabled=false
-        header="Playlists"
-        description="Latest playlists created by user"
-        :owner-id=userId
-        :page-size=7
-      />
-      <track-likes-list
-        header="Liked tracks"
-        :user-id="userId"
-      />
-      <playlist-likes-list
-        header="Liked playlists"
-        :user-id="userId"
-      />
-      <comments-list
-        header="Comments"
-        :user-id="userId"
-      />
-    </b-card-group>
-    <events-section
-      v-if="userEvents"
-      :events="userEvents"
-    />
-    </b-col>
-  </b-row>
+  <div>
+    <b-row>
+      <b-col>
+        <b-card-group columns>
+          <profile-card
+            v-if="userData"
+            :user="userData"
+            :current-user="currentUser"
+            :is-current-user-page="isCurrentUserPage"
+            @image-upload-success="updateInfo"
+          />
+          <tracks-list
+            :is-pagination-enabled=false
+            header="Tracks"
+            description="Latest tracks uploaded by user"
+            :uploader-id=userId
+            :page-size=7
+          />
+          <playlists-list
+            :is-pagination-enabled=false
+            header="Playlists"
+            description="Latest playlists created by user"
+            :owner-id=userId
+            :page-size=7
+          />
+          <track-likes-list
+            header="Liked tracks"
+            :user-id="userId"
+          />
+          <playlist-likes-list
+            header="Liked playlists"
+            :user-id="userId"
+          />
+          <comments-list
+            header="Comments"
+            :user-id="userId"
+          />
+        </b-card-group>
+      </b-col>
+    </b-row>
+    <b-row class="mt-5">
+      <b-col>
+        <events-section
+          v-if="userEvents"
+          :events="userEvents"
+          header="Events"
+          description="Latest events and actions of this user"
+          no-events-message="No events yet"
+        />
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <style scoped>
