@@ -13,11 +13,14 @@ export default {
   computed: {
     loggedIn () {
       return this.$store.state.auth.status.loggedIn
+    },
+    currentUser () {
+      return this.$store.state?.auth?.user
     }
   },
   created () {
     if (this.loggedIn) {
-      this.$router.push('/profile')
+      this.$router.push(`/users/${this.currentUser.id}`)
     }
   },
   methods: {
@@ -32,7 +35,7 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push('/profile')
+              this.$router.push(`/users/${this.currentUser.id}`)
             },
             error => {
               this.loading = false

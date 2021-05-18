@@ -3,12 +3,14 @@
 import TrackDataService from '../services/TrackDataService'
 import CommentsSection from '@/components/CommentsSection'
 import LikeDetails from '@/components/LikeDetails'
+import Aplayer from 'vue-aplayer'
 
 export default {
   name: 'TrackInfo',
   components: {
     'comments-section': CommentsSection,
-    'like-details': LikeDetails
+    'like-details': LikeDetails,
+    aplayer: Aplayer
   },
   props: {
     trackId: {
@@ -17,10 +19,18 @@ export default {
   },
   data () {
     return {
-      trackData: null
+      trackData: { }
     }
   },
-  computed: {},
+  computed: {
+    trackDataForPlayer () {
+      return {
+        title: this.trackData.name,
+        artist: this.trackData.artist,
+        src: 'http://localhost:8080/hls/track1/audio_pl.m3u8'
+      }
+    }
+  },
   methods: {
     async retrieveTrack () {
       const response = await TrackDataService.get(this.trackId)
@@ -29,32 +39,46 @@ export default {
   },
   async mounted () {
     await this.retrieveTrack()
+    this.$refs.aplayer.onSelectSong({ ...this.trackDataForPlayer })
   }
 }
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-6">
-      <li v-if="trackData">
-        <ul>Name: {{ trackData.name }}</ul>
-        <ul>Artist: {{ trackData.artist }}</ul>
-        <ul>Length: {{ trackData.length }}</ul>
-        <ul>Uploader: {{ trackData.uploaderUsername }}</ul>
-      </li>
-    </div>
-    <like-details
-      v-if="trackData"
-      target="track"
-      :target-id="trackId"
-    />
-    <div class="row">
-      <comments-section :track-id="trackId"/>
-    </div>
-    <div class="row">
-      Audio:
-      <audio controls :src="trackId | toAudioSrc" type="audio/mpeg"/>
-    </div>
+  <div class="div">
+    <b-row class="justify-content-md-center">
+      <b-col lg="6">
+        <b-card no-body>
+          <b-card-header class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="h1">{{ trackData.name }}</div>
+              <div class="h4 text-muted">by {{ trackData.artist }}</div>
+              <div class="h6 text-muted">uploaded by {{ trackData.uploaderUsername }}</div>
+            </div>
+            <div>
+              <like-details
+                v-if="trackData"
+                target="track"
+                :target-id="trackId"
+              />
+            </div>
+          </b-card-header>
+          <b-card-body class="p-0">
+            <aplayer v-if="trackData"
+                     :music="trackDataForPlayer"
+                     ref="aplayer"
+            />
+          </b-card-body>
+        </b-card>
+        <hr>
+      </b-col>
+    </b-row>
+
+    <b-row class="justify-content-md-center mt-3">
+      <b-col lg="6">
+        <comments-section :track-id="trackId"/>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

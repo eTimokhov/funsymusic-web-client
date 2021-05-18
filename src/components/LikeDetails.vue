@@ -60,14 +60,16 @@ export default {
 </script>
 
 <template>
-  <div class="row">
-    <button v-if="likeInfo" :disabled="!isUserAuthorized" @click="toggleLike">
-      <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-      {{ isTargetLikedByUser ? 'Unlike' : 'Like' }} ({{ totalLikes }})
-    </button>
+  <div class="d-flex justify-content-between align-items-center">
+    <b-button id="btnLike" v-if="likeInfo" :disabled="!isUserAuthorized" size="lg" variant="white" @click="toggleLike">
+      <b-icon :icon="isTargetLikedByUser ? 'heart-fill' : 'heart'" scale="1.5" :variant="isTargetLikedByUser ? 'danger' : 'dark'"/>
+    </b-button>
+    <div class="h3">{{ totalLikes }}</div>
   </div>
 </template>
 
 <style scoped>
-
+#btnLike:focus {
+  box-shadow: none;
+}
 </style>

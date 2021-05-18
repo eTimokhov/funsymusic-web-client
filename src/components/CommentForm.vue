@@ -17,11 +17,6 @@ export default {
       message: ''
     }
   },
-  computed: {
-    currentUserExists () {
-      return true
-    }
-  },
   methods: {
     handleSaveComment () {
       this.loading = true
@@ -49,35 +44,28 @@ export default {
 </script>
 
 <template>
-  <div class="list row">
-    <div class="col-md-6">
-      <div v-if="currentUserExists">
-        <form id="addCommentForm" @submit.prevent="handleSaveComment">
-          <div class="form-group">
-            <label for="text">Leave your comment</label>
-            <textarea
-              v-model="comment.text"
-              v-validate="'required'"
-              class="form-control"
-              id="text"
-              rows="3"
-              name="text"/>
-            <input v-model="comment.trackId" type="hidden" name="trackId"/>
-            <span v-if="errors.has('text')" class="text-danger">Comment text is required!</span>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary btn-block" :disabled="loading">
-              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-              <span>Save</span>
-            </button>
-          </div>
-        </form>
+  <div>
+    <form id="addCommentForm" @submit.prevent="handleSaveComment">
+      <div class="form-group">
+        <label for="text" class="h5 text-muted">Leave your comment</label>
+        <textarea
+          v-model="comment.text"
+          v-validate="'required'"
+          class="form-control"
+          id="text"
+          rows="3"
+          name="text"/>
+        <input v-model="comment.trackId" type="hidden" name="trackId"/>
+        <span v-if="errors.has('text')" class="text-danger">Comment text is required!</span>
       </div>
-      <h6>Comments</h6>
-      <ul id="commentSection" class="list-unstyled"></ul>
-    </div>
+      <div class="form-group">
+        <b-button variant="outline-primary" block :disabled="loading" @click="handleSaveComment">
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+          <span>Submit</span>
+        </b-button>
+      </div>
+    </form>
   </div>
-
 </template>
 
 <style scoped>

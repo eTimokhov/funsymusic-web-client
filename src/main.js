@@ -35,7 +35,7 @@ Vue.filter('toAudioSrc', function (trackId) {
   return `${config.funsymusicApiUrl}/media/audio/${trackId}`
 })
 
-new Vue({
+window.App = new Vue({
   router,
   store,
   render: h => h(App)

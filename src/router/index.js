@@ -26,12 +26,6 @@ const routes = [
     component: Register
   },
   {
-    path: '/profile',
-    name: 'profile',
-    // lazy-loaded
-    component: () => import('../views/Profile.vue')
-  },
-  {
     path: '/browse/tracks',
     name: 'tracks',
     // lazy-loaded

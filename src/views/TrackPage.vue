@@ -25,12 +25,11 @@ export default {
 <template>
   <div>
     <b-row>
-      track info:
-      <tracks-info
-        :track-id="trackId"
-      />
-<!--      <player/>-->
-
+      <b-col>
+        <tracks-info
+          :track-id="trackId"
+        />
+      </b-col>
     </b-row>
   </div>
 </template>

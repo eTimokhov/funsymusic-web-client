@@ -97,6 +97,7 @@ export default {
         </b-card-group>
       </b-col>
     </b-row>
+    <hr>
     <b-row class="mt-5">
       <b-col>
         <events-section
