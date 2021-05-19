@@ -3,11 +3,7 @@ import LikeDataService from '@/services/LikeDataService'
 
 export default {
   name: 'LikeDetails',
-  components: {
-    // 'comments-section': CommentsSection
-  },
   props: {
-    // 'track' or 'playlist'
     target: {
       type: String,
       required: true

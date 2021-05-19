@@ -7,9 +7,6 @@ import VeeValidate from 'vee-validate'
 import moment from 'moment'
 import config from '@/config/config'
 
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
@@ -31,8 +28,8 @@ Vue.filter('toSmallImg', function (image) {
   return image + '_small'
 })
 
-Vue.filter('toAudioSrc', function (trackId) {
-  return `${config.funsymusicApiUrl}/media/audio/${trackId}`
+Vue.filter('toAudioSrc', function (fileName) {
+  return `${config.funsymusicApiUrl}/hls/${fileName}/audio_pl.m3u8`
 })
 
 window.App = new Vue({

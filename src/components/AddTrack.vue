@@ -30,6 +30,7 @@ export default {
             this.loading = false
             this.track = new Track('', '', 0, '')
             this.state = 'afterSave'
+            this.$emit('track-added')
           },
           error => {
             this.loading = false
@@ -89,7 +90,7 @@ export default {
             <span v-if="errors.has('artist')" class="text-danger">Track artist is required!</span>
           </div>
           <div class="form-group">
-            <b-button variant="outline-success" block :disabled="loading">
+            <b-button variant="outline-success" block :disabled="loading" @click="handleSaveTrack">
               <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               <span>Save</span>
             </b-button>

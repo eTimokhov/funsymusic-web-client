@@ -1,3 +1,4 @@
+<script src="main.js"></script>
 <script>
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'

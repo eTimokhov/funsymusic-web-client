@@ -17,6 +17,11 @@ export default {
     currentUser () {
       return this.$store.state.auth.user
     }
+  },
+  methods: {
+    updateTracks () {
+      this.$refs.tracksList.retrieveTracks()
+    }
   }
 }
 </script>
@@ -30,10 +35,11 @@ export default {
           header="All tracks"
           description="Check out all the track in our music service"
           :page-size=10
+          ref="tracksList"
         />
       </b-col>
       <b-col md="3">
-        <add-track/>
+        <add-track @track-added="updateTracks"/>
       </b-col>
     </b-row>
   </div>

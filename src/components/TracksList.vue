@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     async retrieveTracks () {
-      // const response = await fetchTracks(this.page - 1, this.pageSize)
       const response = await TrackDataService.getAll(this.buildRequestParams())
       const {
         tracks,

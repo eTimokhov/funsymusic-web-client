@@ -37,7 +37,7 @@ export default {
       </b-col>
     </b-row>
     <b-row>
-      <b-col md="4">
+      <b-col md="4" class="mt-5">
         <tracks-list
           header="Explore new music"
           description="Check out new tracks that our users uploaded"
@@ -45,7 +45,7 @@ export default {
           :is-pagination-enabled=false
         />
       </b-col>
-      <b-col md="4">
+      <b-col md="4" class="mt-5">
         <playlists-list
           header="Check new playlists"
           description="Listen new music collections that our users created"
@@ -53,7 +53,7 @@ export default {
           :is-pagination-enabled=false
         />
       </b-col>
-      <b-col md="4">
+      <b-col md="4" class="mt-5">
         <users-list
           header="Subscribe to new users"
           description="Explore new users of our service and find new friends"

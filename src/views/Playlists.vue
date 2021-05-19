@@ -17,6 +17,11 @@ export default {
     currentUser () {
       return this.$store.state.auth.user
     }
+  },
+  methods: {
+    updatePlaylists () {
+      this.$refs.playlistsList.retrievePlaylists()
+    }
   }
 }
 </script>
@@ -30,10 +35,11 @@ export default {
           header="All playlists"
           description="Check out all the playlists created by our users"
           :page-size=10
+          ref="playlistsList"
         />
       </b-col>
       <b-col md="3">
-        <add-playlist/>
+        <add-playlist @playlist-added="updatePlaylists"/>
       </b-col>
     </b-row>
   </div>

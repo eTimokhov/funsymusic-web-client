@@ -25,6 +25,7 @@ export default {
             this.loading = false
             this.isPlaylistCreated = true
             this.playlist = new Playlist('')
+            this.$emit('playlist-added')
           },
           error => {
             this.loading = false
@@ -60,7 +61,7 @@ export default {
           <span v-if="errors.has('name')" class="text-danger">Playlist name is required!</span>
         </div>
         <div class="form-group">
-          <b-button variant="outline-success" block :disabled="loading">
+          <b-button variant="outline-success" block :disabled="loading" @click="handleCreatePlaylist">
             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
             <span>Create</span>
           </b-button>

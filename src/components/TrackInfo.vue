@@ -3,6 +3,7 @@
 import TrackDataService from '../services/TrackDataService'
 import CommentsSection from '@/components/CommentsSection'
 import LikeDetails from '@/components/LikeDetails'
+import TipDetails from '@/components/TipDetails'
 import Aplayer from 'vue-aplayer'
 
 export default {
@@ -10,6 +11,7 @@ export default {
   components: {
     'comments-section': CommentsSection,
     'like-details': LikeDetails,
+    'tip-details': TipDetails,
     aplayer: Aplayer
   },
   props: {
@@ -19,7 +21,7 @@ export default {
   },
   data () {
     return {
-      trackData: { }
+      trackData: {}
     }
   },
   computed: {
@@ -27,7 +29,7 @@ export default {
       return {
         title: this.trackData.name,
         artist: this.trackData.artist,
-        src: 'http://localhost:8080/hls/track1/audio_pl.m3u8'
+        src: this.$options.filters.toAudioSrc(this.trackData.mediaFileName)
       }
     }
   },
@@ -39,7 +41,7 @@ export default {
   },
   async mounted () {
     await this.retrieveTrack()
-    this.$refs.aplayer.onSelectSong({ ...this.trackDataForPlayer })
+    // this.$refs.aplayer.onSelectSong({ ...this.trackDataForPlayer })
   }
 }
 </script>
@@ -61,12 +63,11 @@ export default {
                 target="track"
                 :target-id="trackId"
               />
+              <tip-details v-if="trackData" :track-id="trackId"/>
             </div>
           </b-card-header>
           <b-card-body class="p-0">
-            <aplayer v-if="trackData"
-                     :music="trackDataForPlayer"
-                     ref="aplayer"
+            <aplayer :music="trackDataForPlayer" ref="aplayer"
             />
           </b-card-body>
         </b-card>

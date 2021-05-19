@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import TrackPage from '../views/TrackPage.vue'
+import PlaylistPage from '@/views/PlaylistPage'
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,10 @@ const routes = [
   {
     path: '/tracks/:id',
     component: TrackPage
+  },
+  {
+    path: '/playlists/:id',
+    component: PlaylistPage
   }
 ]
 

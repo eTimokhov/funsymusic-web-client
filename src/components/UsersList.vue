@@ -80,7 +80,7 @@ export default {
           </template>
         </div>
         <div>
-          <b-icon icon="person" class="mr-2" scale="2" variant="dark"/>
+          <b-icon icon="person"  class="mr-2" scale="2" variant="dark"/>
         </div>
       </div>
       <small v-if="description">

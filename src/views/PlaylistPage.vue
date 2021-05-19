@@ -1,13 +1,13 @@
 <script>
-import TrackInfo from '@/components/TrackInfo'
+import PlaylistInfo from '@/components/PlaylistInfo'
 
 export default {
-  name: 'TrackPage',
+  name: 'PlaylistPage',
   components: {
-    'track-info': TrackInfo
+    'playlist-info': PlaylistInfo
   },
   computed: {
-    trackId () {
+    playlistId () {
       return this.$route.params.id
     }
   }
@@ -18,8 +18,8 @@ export default {
   <div>
     <b-row>
       <b-col>
-        <track-info
-          :track-id="trackId"
+        <playlist-info
+          :playlist-id="playlistId"
         />
       </b-col>
     </b-row>
