@@ -20,8 +20,7 @@ export default {
   },
   data () {
     return {
-      tracks: JSON.parse(JSON.stringify(this.tracksData)),
-      isPlaylistSaved: false
+      tracks: JSON.parse(JSON.stringify(this.tracksData))
     }
   },
   computed: {
@@ -38,6 +37,7 @@ export default {
       await PlaylistDataService.updatePlaylist(updPlData)
       this.isPlaylistSaved = true
       this.$emit('playlist-updated')
+      this.hideModal()
     },
     handleMarkDeletedToggle (trackId) {
       console.log('handleMarkDeletedToggle')
@@ -45,6 +45,10 @@ export default {
         return track.id === trackId
       })
       this.tracks[index].uploaderUsername = this.tracks[index].uploaderUsername ? '' : 'doNotDelete'
+    },
+
+    hideModal () {
+      this.$root.$emit('bv::hide::modal', 'modal-edit-playlist')
     },
 
     resetModal () {
@@ -64,38 +68,37 @@ export default {
       <b-icon icon="pencil" scale="1.5" variant="dark"/>
     </b-button>
     <b-modal id="modal-edit-playlist" title="Edit playlist" @hidden="resetModal" hide-footer>
-      <template v-if="!isPlaylistSaved">
-        <b-list-group v-if="tracks.length" flush>
-          <draggable v-model="tracks" handle=".handle">
-            <b-list-group-item
-              v-for="track in tracks"
-              :key="track.id"
-              class="d-flex justify-content-between align-items-center"
-              :variant="!track.uploaderUsername ? 'secondary' : ''">
-              <div class="d-flex justify-content-between align-items-center">
-                <b-icon class="handle mr-3" role='button' icon="list"
-                        @click="handleMarkDeletedToggle(track.id)"></b-icon>
-                <div>
-                  <div class="font-weight-bold">{{ track.name }}</div>
-                  <div class="text-muted">{{ track.artist }}</div>
-                </div>
+      <b-list-group v-if="tracks.length" flush>
+        <draggable v-model="tracks" handle=".handle">
+          <b-list-group-item
+            v-for="track in tracks"
+            :key="track.id"
+            class="d-flex justify-content-between align-items-center"
+            :variant="!track.uploaderUsername ? 'secondary' : ''">
+            <div class="d-flex justify-content-between align-items-center">
+              <b-icon class="handle mr-3" role='button' icon="list"
+                      @click="handleMarkDeletedToggle(track.id)"></b-icon>
+              <div>
+                <div class="font-weight-bold">{{ track.name }}</div>
+                <div class="text-muted">{{ track.artist }}</div>
               </div>
-              <div class="text-muted">
-                <span>{{ track.length | toTrackTimeFormat }}</span>
-                <b-icon icon="plus" :rotate="!track.uploaderUsername ? 0 : 45" scale="2" class="ml-2"
-                        :variant="!track.uploaderUsername ? '' : 'danger'"
-                        @click="handleMarkDeletedToggle(track.id)" role='button'></b-icon>
-              </div>
-            </b-list-group-item>
-          </draggable>
-        </b-list-group>
-        <div v-else class="h4 text-muted">
-          This playlist is empty
-        </div>
+            </div>
+            <div class="text-muted">
+              <span>{{ track.length | toTrackTimeFormat }}</span>
+              <b-icon icon="plus" :rotate="!track.uploaderUsername ? 0 : 45" scale="2" class="ml-2"
+                      :variant="!track.uploaderUsername ? '' : 'danger'"
+                      @click="handleMarkDeletedToggle(track.id)" role='button'></b-icon>
+            </div>
+          </b-list-group-item>
+        </draggable>
+      </b-list-group>
+      <div v-else class="h4 text-muted">
+        This playlist is empty
+      </div>
+      <div class="mt-3">
         <b-button block variant="outline-success" @click="handleUpdatePlaylist">Save</b-button>
-      </template>
-      <p v-else>Playlist is saved successfully</p>
-      <b-button block @click="$bvModal.hide('modal-edit-playlist')">Close</b-button>
+        <b-button block @click="$bvModal.hide('modal-edit-playlist')">Close</b-button>
+      </div>
     </b-modal>
   </div>
 </template>

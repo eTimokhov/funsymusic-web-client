@@ -32,6 +32,10 @@ Vue.filter('toAudioSrc', function (fileName) {
   return `${config.funsymusicApiUrl}/hls/${fileName}/audio_pl.m3u8`
 })
 
+Vue.filter('toDownloadLink', function (fileName) {
+  return `${config.funsymusicApiUrl}/music/${fileName}.mp3`
+})
+
 window.App = new Vue({
   router,
   store,

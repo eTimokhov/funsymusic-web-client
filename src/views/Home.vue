@@ -30,8 +30,8 @@ export default {
           header="Your favorite music service"
           lead="Explore new music, create playlists, upload your own music and share it with friends!">
           <b-button-group v-if="!currentUser">
-            <b-button to="/register" variant="secondary">Sign up</b-button>
-            <b-button to="/login" variant="secondary">Sign in</b-button>
+            <b-button to="/register" variant="outline-dark" class="mr-2">Sign up</b-button>
+            <b-button to="/login" variant="outline-dark" class="mr-2">Sign in</b-button>
           </b-button-group>
         </b-jumbotron>
       </b-col>

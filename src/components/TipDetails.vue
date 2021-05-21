@@ -54,7 +54,7 @@ export default {
 
 <template>
   <div>
-    <b-button v-b-modal.modal-tip id="btnAddToPl" v-if="tipData" :disabled="!currentUser" size="lg" variant="white">
+    <b-button v-b-modal.modal-tip id="btnAddToPl" v-if="tipData && currentUser" :disabled="!currentUser" size="lg" variant="white">
       <b-icon icon="journal-plus" scale="1.5" variant="dark"/>
     </b-button>
     <b-modal id="modal-tip" title="Add to playlists" hide-footer>

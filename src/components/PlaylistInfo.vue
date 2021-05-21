@@ -75,7 +75,9 @@ export default {
               <edit-playlist
                 v-if="tracksData"
                 :tracks-data="tracksData"
-                :playlist-id="playlistId"/>
+                :playlist-id="playlistId"
+                @playlist-updated="retrieveTracks"
+              />
             </div>
           </b-card-header>
           <b-card-body class="p-0">

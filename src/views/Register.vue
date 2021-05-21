@@ -12,10 +12,11 @@
             <label for="username">Username</label>
             <input
               v-model="user.username"
-              v-validate="'required|min:3|max:20'"
+              v-validate="{ required: true, min: 6, max: 18, regex: /^[a-zA-Z\d\._]+$/ }"
               type="text"
               class="form-control"
               name="username"
+              id="username"
             />
             <div
               v-if="submitted && errors.has('username')"
@@ -30,6 +31,7 @@
               type="password"
               class="form-control"
               name="password"
+              id="password"
             />
             <div
               v-if="submitted && errors.has('password')"
@@ -37,13 +39,14 @@
             >{{errors.first('password')}}</div>
           </div>
           <div class="form-group">
-            <label for="password">Confirm password</label>
+            <label for="passwordConfirm">Confirm password</label>
             <input
               v-model="user.passwordConfirm"
               v-validate="'required|min:6|max:40'"
               type="password"
               class="form-control"
               name="password"
+              id="passwordConfirm"
             />
             <div
               v-if="submitted && errors.has('password')"
@@ -100,10 +103,7 @@ export default {
               this.successful = true
             },
             error => {
-              this.message =
-                (error.response && error.response.data) ||
-                error.message ||
-                error.toString()
+              this.message = error.response.data.message
               this.successful = false
             }
           )

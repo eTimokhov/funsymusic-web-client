@@ -4,6 +4,7 @@ import TrackDataService from '../services/TrackDataService'
 import CommentsSection from '@/components/CommentsSection'
 import LikeDetails from '@/components/LikeDetails'
 import TipDetails from '@/components/TipDetails'
+import DownloadTrack from '@/components/DownloadTrack'
 import Aplayer from 'vue-aplayer'
 
 export default {
@@ -12,6 +13,7 @@ export default {
     'comments-section': CommentsSection,
     'like-details': LikeDetails,
     'tip-details': TipDetails,
+    'download-track': DownloadTrack,
     aplayer: Aplayer
   },
   props: {
@@ -41,7 +43,6 @@ export default {
   },
   async mounted () {
     await this.retrieveTrack()
-    // this.$refs.aplayer.onSelectSong({ ...this.trackDataForPlayer })
   }
 }
 </script>
@@ -64,6 +65,7 @@ export default {
                 :target-id="trackId"
               />
               <tip-details v-if="trackData" :track-id="trackId"/>
+              <download-track v-if="trackData" :track-filename="trackData.mediaFileName"/>
             </div>
           </b-card-header>
           <b-card-body class="p-0">
