@@ -83,7 +83,7 @@ export default {
                 <div class="text-muted">{{ track.artist }}</div>
               </div>
             </div>
-            <div class="text-muted">
+            <div class="text-muted d-flex justify-content-between align-items-center">
               <span>{{ track.length | toTrackTimeFormat }}</span>
               <b-icon icon="plus" :rotate="!track.uploaderUsername ? 0 : 45" scale="2" class="ml-2"
                       :variant="!track.uploaderUsername ? '' : 'danger'"

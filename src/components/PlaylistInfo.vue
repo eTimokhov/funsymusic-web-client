@@ -26,6 +26,9 @@ export default {
   computed: {
     tracksDataForPlayer () {
       return this.tracksData?.map(this.trackToPlayerFormat)
+    },
+    currentUser () {
+      return this.$store.state?.auth?.user
     }
   },
   methods: {
@@ -73,7 +76,7 @@ export default {
                 :target-id="playlistId"
               />
               <edit-playlist
-                v-if="tracksData"
+                v-if="tracksData && currentUser.id === playlistData.ownerId"
                 :tracks-data="tracksData"
                 :playlist-id="playlistId"
                 @playlist-updated="retrieveTracks"

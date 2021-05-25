@@ -18,7 +18,7 @@ class UploadFilesService {
 
     formData.append('file', file)
 
-    return http.post('/user/image', formData, {
+    return http.post('/users/image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
